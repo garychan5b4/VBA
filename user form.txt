@@ -1,0 +1,32 @@
+Option Explicit
+
+Sub ListFolder()
+Dim objFSO As Object
+Dim objFolder As Object
+Dim objFile As Object
+Dim i As Integer
+
+'Create an instance of the FileSystemObject
+Set objFSO = CreateObject("Scripting.FileSystemObject")
+'Get the folder object
+Dim Path As String
+Path = ActiveWorkbook.Path & "\Dashboard from Origins"
+Set objFolder = objFSO.GetFolder(Path)
+i = 1
+'loops through each file in the directory and prints their names and path
+For Each objFile In objFolder.Files
+'print file name
+Cells(i + 1, 1) = objFile.Name
+'print file path
+Cells(i + 1, 2) = objFile.Path
+i = i + 1
+Next objFile
+End Sub
+
+Sub ClearForm()
+
+For j = 1 To 3
+    UserForm1.Controls("TextBox" & j).Value = ""
+Next j
+
+End Sub
